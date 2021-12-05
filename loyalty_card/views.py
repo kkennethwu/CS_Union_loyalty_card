@@ -43,13 +43,13 @@ def callback(request):
             message = []
             if re.match("新增會員資料", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage=0, point=1)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage='剛登入', point=0)
                     message.append(TextSendMessage(text='會員資料新增完畢'))
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     message.append(TextSendMessage(text='已經有建立會員資料囉'))
                     user_info = User_Info.objects.filter(uid=uid)
                     for user in user_info:
-                        info = 'UID=%s\nNAME=%s\n大頭貼=%s\npoint=%s'%(user.uid,user.name,user.pic_url,user.point)
+                        info = 'UID=%s\nNAME=%s\n大頭貼=%s\nStage=%s\nPoint=%s'%(user.uid,user.name,user.pic_url,user.stage,user.point)
                         message.append(TextSendMessage(text=info))
                 line_bot_api.reply_message(event.reply_token,message)
 
