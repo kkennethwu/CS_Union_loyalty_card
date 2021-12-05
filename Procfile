@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath CS_Union_loyalty_card CS_Union_loyalty_card.wsgi
