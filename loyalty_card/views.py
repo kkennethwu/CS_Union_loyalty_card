@@ -65,6 +65,7 @@ def callback(request):
                     stage = user.stage
                 if re.match(stage, "GitHub工作坊"):
                     message.append(TextSendMessage(text='stage in github'))
+                line_bot_api.reply_message(event.reply_token,message)
 
 
 
