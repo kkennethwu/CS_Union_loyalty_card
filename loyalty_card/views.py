@@ -41,17 +41,34 @@ def callback(request):
             name=profile.display_name
             pic_url=profile.picture_url
             message = []
-            if re.match("新增會員資料", event.message.text):
+            stage = ""
+            # if re.match("新增會員資料", event.message.text):
+            #     if User_Info.objects.filter(uid=uid).exists()==False:
+            #         User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage='建立會員中')
+            #     elif User_Info.objects.filter(uid=uid).exists()==True:
+            #         message.append(TextSendMessage(text='已經有建立會員資料囉'))
+            #         user_info = User_Info.objects.filter(uid=uid)
+            #         for user in user_info:
+            #             info = 'UID=%s\nNAME=%s\n大頭貼=%s\nStage=%s\nPoint=%s'%(user.uid,user.name,user.pic_url,user.stage)
+            #             message.append(TextSendMessage(text=info))
+            #     line_bot_api.reply_message(event.reply_token,message)
+            if re.match("GitHub工作坊", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage='已建立會員', point=0)
-                    message.append(TextSendMessage(text='會員資料新增完畢'))
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="GitHub工作坊", point=0)
                 elif User_Info.objects.filter(uid=uid).exists()==True:
-                    message.append(TextSendMessage(text='已經有建立會員資料囉'))
-                    user_info = User_Info.objects.filter(uid=uid)
-                    for user in user_info:
-                        info = 'UID=%s\nNAME=%s\n大頭貼=%s\nStage=%s\nPoint=%s'%(user.uid,user.name,user.pic_url,user.stage,user.point)
-                        message.append(TextSendMessage(text=info))
+                    User_Info.objects.filter(uid=uid).update(stage = "GitHub工作坊")
+                message.append(TextSendMessage(text='請輸入學號'))
                 line_bot_api.reply_message(event.reply_token,message)
+            if User_Info.objects.filter(uid=uid).exists()==True:
+                user_info = User_Info.objects.filter(uid=uid)
+                for user in user_info:
+                    stage = user.stage
+                if re.match(stage, "GitHub工作坊"):
+                    message.append(TextSendMessage(text='stage in github'))
+
+
+
+
 
 
         return HttpResponse()
