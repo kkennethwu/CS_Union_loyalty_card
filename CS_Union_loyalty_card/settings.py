@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'loyalty_card'
+    'loyalty_card',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,5 @@ STATICILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True

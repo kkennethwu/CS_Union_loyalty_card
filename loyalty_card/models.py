@@ -21,12 +21,9 @@ class User_Info(models.Model):
 #     student_id = models.CharField(max_length=50,null=False,default='')
 
 class Sheet(models.Model):
-    name = models.CharField(max_length=10,null=False,default='')
-    student_id = models.CharField(max_length=10,null=False,default='')
-    grade = models.CharField(max_length=10,null=False,default='')
-    cellphone = models.CharField(max_length=10,null=False,default='')
-    email = models.CharField(max_length=50,null=False,default='')
+    student_id = models.CharField(max_length=20)
     getpoint = models.IntegerField(default=0)
+
 
 # class Machi(models.Model):
 #     name = models.CharField(max_length=10,null=False,default='')

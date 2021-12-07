@@ -18,3 +18,4 @@ sqlparse==0.4.2
 typing_extensions==4.0.1
 urllib3==1.26.7
 yarl==1.7.2
+django-import-export==2.6.1
