@@ -12,20 +12,19 @@ class User_Info(models.Model):
     def __str__(self):
         return self.uid
 
-# class Hotpot(models.Model):
-#     name = models.CharField(max_length=10,null=False,default='')
-#     student_id = models.CharField(max_length=50,null=False,default='')
+class Hotpot(models.Model):
+    student_id = models.CharField(max_length=20)
+    getpoint = models.IntegerField(default=0)
 
-# class Github(models.Model):
-#     name = models.CharField(max_length=10,null=False,default='')
-#     student_id = models.CharField(max_length=50,null=False,default='')
+class Github(models.Model):
+    student_id = models.CharField(max_length=20)
+    getpoint = models.IntegerField(default=0)
 
 class Sheet(models.Model):
     student_id = models.CharField(max_length=20)
     getpoint = models.IntegerField(default=0)
 
-
-# class Machi(models.Model):
-#     name = models.CharField(max_length=10,null=False,default='')
-#     student_id = models.CharField(max_length=50,null=False,default='')
+class Machi(models.Model):
+    student_id = models.CharField(max_length=20)
+    getpoint = models.IntegerField(default=0)
 
