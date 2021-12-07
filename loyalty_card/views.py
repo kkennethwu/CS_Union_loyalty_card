@@ -95,8 +95,8 @@ def callback(request):
                 user_info = User_Info.objects.filter(uid=uid)
                 for user in user_info:
                     stage = user.stage
-                if re.match(stage, "GitHub工作坊"):
-                    message.append(TextSendMessage(text='stage in github'))
+                if re.match(stage, "簡歷工作坊"):
+                    message.append(TextSendMessage(text='stage in sheet'))
                 line_bot_api.reply_message(event.reply_token,message)
 
 

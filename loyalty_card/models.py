@@ -12,19 +12,23 @@ class User_Info(models.Model):
     def __str__(self):
         return self.uid
 
-class Hotpot(models.Model):
-    name = models.CharField(max_length=10,null=False,default='')
-    student_id = models.CharField(max_length=50,null=False,default='')
+# class Hotpot(models.Model):
+#     name = models.CharField(max_length=10,null=False,default='')
+#     student_id = models.CharField(max_length=50,null=False,default='')
 
-class Github(models.Model):
-    name = models.CharField(max_length=10,null=False,default='')
-    student_id = models.CharField(max_length=50,null=False,default='')
+# class Github(models.Model):
+#     name = models.CharField(max_length=10,null=False,default='')
+#     student_id = models.CharField(max_length=50,null=False,default='')
 
 class Sheet(models.Model):
     name = models.CharField(max_length=10,null=False,default='')
-    student_id = models.CharField(max_length=50,null=False,default='')
+    student_id = models.CharField(max_length=10,null=False,default='')
+    grade = models.CharField(max_length=10,null=False,default='')
+    cellphone = models.CharField(max_length=10,null=False,default='')
+    email = models.CharField(max_length=50,null=False,default='')
+    getpoint = models.IntegerField(default=0)
 
-class Machi(models.Model):
-    name = models.CharField(max_length=10,null=False,default='')
-    student_id = models.CharField(max_length=50,null=False,default='')
+# class Machi(models.Model):
+#     name = models.CharField(max_length=10,null=False,default='')
+#     student_id = models.CharField(max_length=50,null=False,default='')
 
