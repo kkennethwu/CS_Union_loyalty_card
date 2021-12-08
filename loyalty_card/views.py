@@ -104,10 +104,8 @@ def callback(request):
                     stage = user.stage
                 if re.match(stage, "簡歷工作坊"):
                     message.append(TextSendMessage(text='//登記簡歷工作坊集點卡中\n'))
-                    temp = '學號%s'%(event.message.text)
-                    message.append(TextSendMessage(text=temp))
                     if Sheet.objects.filter(student_id = event.message.text).exists() == False:
-                        message.append(TextSendMessage(text='//您尚未報名或是輸入非學號字元\n'))
+                        message.append(TextSendMessage(text='學號%s\n尚未報名或是輸入非學號字元\n'%(event.message.text)))
                     elif Sheet.objects.filter(student_id = event.message.text).exists() == True:
                         student_info = Sheet.objects.filter(student_id = event.message.text)
                         for s in student_info:
