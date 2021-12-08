@@ -87,8 +87,13 @@ def callback(request):
                     User_Info.objects.filter(uid=uid).update(stage = "你麻糬了")
                 message.append(TextSendMessage(text='請輸入學號'))
                 line_bot_api.reply_message(event.reply_token,message)
-
-
+            elif re.match("點數查詢", event.message.text):
+                if User_Info.objects.filter(uid=uid).exists()==False:
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="點數查詢", point=0)
+                elif User_Info.objects.filter(uid=uid).exists()==True:
+                    User_Info.objects.filter(uid=uid).update(stage = "點數查詢")
+                message.append(TextSendMessage(text='請輸入學號'))
+                line_bot_api.reply_message(event.reply_token,message)
 
 
             if User_Info.objects.filter(uid=uid).exists()==True:
