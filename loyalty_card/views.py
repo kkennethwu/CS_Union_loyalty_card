@@ -10,6 +10,8 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
 
 import re
+
+from linebot.models.responses import MessageQuotaResponse
 from loyalty_card.models import *
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -64,7 +66,7 @@ def callback(request):
                     User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="簡歷工作坊", point=0)
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "簡歷工作坊")
-                message.append(TextSendMessage(text='請輸入學號'))
+                message.append(TextSendMessage(text='請輸入學號登記集點'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("火鍋大會", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
@@ -101,9 +103,11 @@ def callback(request):
                 for user in user_info:
                     stage = user.stage
                 if re.match(stage, "簡歷工作坊"):
-                    message.append(TextSendMessage(text='stage in sheet\n'))
+                    message.append(TextSendMessage(text='//登記簡歷工作坊集點卡中\n'))
+                    temp = '學號$s'%(event.message.text)
+                    message.append(TextSendMessage(text=temp))
                     if Sheet.objects.filter(student_id = event.message.text).exists() == False:
-                        message.append(TextSendMessage(text='您尚未報名\n'))
+                        message.append(TextSendMessage(text='//您尚未報名或是輸入非學號字元\n'))
                     elif Sheet.objects.filter(student_id = event.message.text).exists() == True:
                         student_info = Sheet.objects.filter(student_id = event.message.text)
                         for s in student_info:
