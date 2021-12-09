@@ -80,7 +80,7 @@ def callback(request):
                     User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="抽彤瑾", point=0)
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "抽彤瑾")
-                message.append(TextSendMessage(text='請輸入學號進行登記集點'))
+                message.append(TextSendMessage(text='您好，「抽彤瑾」會由後台進行登記，請輸入學號查詢是否登記成功。'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("你麻糬了", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
@@ -151,7 +151,7 @@ def callback(request):
                             else:
                                 message.append(TextSendMessage(text='已經集點過囉 現有兩點\n'))
                 elif re.match(stage, "抽彤瑾"):
-                    message.append(TextSendMessage(text='stage in 抽彤瑾'))
+                    message.append(TextSendMessage(text='Stage in 抽彤瑾'))
                     # if Sheet.objects.filter(student_id = event.message.text).exists() == False:
                     #     message.append(TextSendMessage(text='您尚未報名\n'))
                     # elif Sheet.objects.filter(student_id = event.message.text).exists() == True:

@@ -5,7 +5,7 @@ from django.http.response import StreamingHttpResponse
 from loyalty_card.models import *
 from import_export.admin import ImportExportModelAdmin
 
-from loyalty_card.resources import GithubResource, HotpotResource, MachiResource, SheetResource
+from loyalty_card.resources import GithubResource, HotpotResource, JolinResource, MachiResource, SheetResource
 
 
 class User_Info_Admin(ImportExportModelAdmin):
@@ -29,4 +29,8 @@ class Machi_Admin(ImportExportModelAdmin):
     resource_class = MachiResource
 admin.site.register(Machi,Machi_Admin)
 
+class Jolin_Admin(ImportExportModelAdmin):
+    resource_class = JolinResource
+    list_display = ('student_id', 'flg', 'getpoint')
+admin.site.register(Jolin, Jolin_Admin)
 
