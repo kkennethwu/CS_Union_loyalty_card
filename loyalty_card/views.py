@@ -32,11 +32,6 @@ def callback(request):
             return HttpResponseBadRequest()
 
         for event in events:
-            # if isinstance(event, MessageEvent):
-            #     mtext=event.message.text
-            #     message=[]
-            #     message.append(TextSendMessage(text=mtext))
-            #     line_bot_api.reply_message(event.reply_token,message)
             mtext=event.message.text
             uid=event.source.user_id
             profile=line_bot_api.get_profile(uid)
@@ -44,16 +39,7 @@ def callback(request):
             pic_url=profile.picture_url
             message = []
             stage = ""
-            # if re.match("新增會員資料", event.message.text):
-            #     if User_Info.objects.filter(uid=uid).exists()==False:
-            #         User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage='建立會員中')
-            #     elif User_Info.objects.filter(uid=uid).exists()==True:
-            #         message.append(TextSendMessage(text='已經有建立會員資料囉'))
-            #         user_info = User_Info.objects.filter(uid=uid)
-            #         for user in user_info:
-            #             info = 'UID=%s\nNAME=%s\n大頭貼=%s\nStage=%s\nPoint=%s'%(user.uid,user.name,user.pic_url,user.stage)
-            #             message.append(TextSendMessage(text=info))
-            #     line_bot_api.reply_message(event.reply_token,message)
+            ##### Change Stage #####
             if re.match("GitHub工作坊", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
                     User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="GitHub工作坊", point=0)
@@ -96,8 +82,22 @@ def callback(request):
                     User_Info.objects.filter(uid=uid).update(stage = "點數查詢")
                 message.append(TextSendMessage(text='//請輸入學號以查詢集點總和'))
                 line_bot_api.reply_message(event.reply_token,message)
-
-
+            elif re.match("jolinon", event.message.text): ##### 開啟抽彤瑾管理員系統 #####
+                if User_Info.objects.filter(uid=uid).exists()==False:
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="抽彤瑾管理員系統", point=0)
+                elif User_Info.objects.filter(uid=uid).exists()==True:
+                    User_Info.objects.filter(uid=uid).update(stage = "抽彤瑾管理員系統")
+                message.append(TextSendMessage(text='//已進入 「抽彤瑾管理員系統」'))
+                message.append(TextSendMessage(text='//周彤瑾，請你輸入有玩「抽彤瑾」的人的學號，如果你要關掉請輸入"jolinoff"，不然直接按下面的選單也可。'))
+                line_bot_api.reply_message(event.reply_token,message)
+            elif re.match("jolinoff", event.message.text): ##### 關閉抽彤瑾管理員系統 #####
+                if User_Info.objects.filter(uid=uid).exists()==False:
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="default", point=0)
+                elif User_Info.objects.filter(uid=uid).exists()==True:
+                    User_Info.objects.filter(uid=uid).update(stage = "default")
+                message.append(TextSendMessage(text='//已關閉「抽彤瑾管理員系統\n掰掰周彤瑾'))
+                line_bot_api.reply_message(event.reply_token,message)
+            ##### 查詢集點狀況 #####
             if User_Info.objects.filter(uid=uid).exists()==True:
                 user_info = User_Info.objects.filter(uid=uid)
                 for user in user_info:
@@ -137,7 +137,7 @@ def callback(request):
                     elif Machi.objects.filter(student_id = event.message.text).exists() == True:
                         student_info = Machi.objects.filter(student_id = event.message.text)
                         message.append(TextSendMessage(text='學號%s 已獲得%s點'%(event.message.text, student_info[0].getpoint)))
-                if re.match(stage, "點數查詢"):
+                elif re.match(stage, "點數查詢"):
                     message.append(TextSendMessage(text='//查詢「總點數」'))
                     sum = 0
                     if Sheet.objects.filter(student_id = event.message.text).exists() == True:
@@ -158,8 +158,13 @@ def callback(request):
                     if sum == 0:
                         message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名任一資工感化院活動\n2.未參加任一資工感化院活動\n3.輸入非學號字元\n**如有任何問題請聯絡交大資工系學會粉專'%(event.message.text)))
                     else:
-                        message.append(TextSendMessage(text='學號%s 獲得%s點'%(event.message.text, sum)))
+                        message.append(TextSendMessage(text='學號%s 共獲得%s點'%(event.message.text, sum)))
+                elif re.match(stage, "抽彤瑾管理員系統"):
+                    CCK.objects.create(student_id = event.message.text, getpoint = 1)
+                    message.append(TextSendMessage(text='周彤瑾，請輸入下一個玩的人的學號，或是輸入"jolinoff"把「抽彤瑾管理員系統」關掉'))
                 # Robot Reply
+                elif re.match(stage, "default"):
+                    message.append(TextSendMessage(text='感謝您使用資工感化院集點卡，請按選單上的選項進行點數查詢!!'))
                 line_bot_api.reply_message(event.reply_token,message)
 
 
