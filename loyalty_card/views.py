@@ -42,49 +42,49 @@ def callback(request):
             ##### Change Stage #####
             if re.match("GitHub工作坊", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="GitHub工作坊", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="GitHub工作坊")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "GitHub工作坊")
                 message.append(TextSendMessage(text='//請輸入學號以查詢集點狀況'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("簡歷工作坊", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="簡歷工作坊", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="簡歷工作坊")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "簡歷工作坊")
                 message.append(TextSendMessage(text='//請輸入學號以查詢集點狀況'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("火鍋大會", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="火鍋大會", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="火鍋大會")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "火鍋大會")
                 message.append(TextSendMessage(text='//請輸入學號以查詢集點狀況'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("抽彤瑾", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="抽彤瑾", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="抽彤瑾")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "抽彤瑾")
                 message.append(TextSendMessage(text='//請輸入學號以查詢集點狀況'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("你麻糬了", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="你麻糬了", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="你麻糬了")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "你麻糬了")
                 message.append(TextSendMessage(text='//請輸入學號以查詢集點狀況'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("點數查詢", event.message.text):
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="點數查詢", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="點數查詢")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "點數查詢")
                 message.append(TextSendMessage(text='//請輸入學號以查詢集點總和'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("jolinon", event.message.text): ##### 開啟抽彤瑾管理員系統 #####
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="抽彤瑾管理員系統", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="抽彤瑾管理員系統")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "抽彤瑾管理員系統")
                 message.append(TextSendMessage(text='//已進入 「抽彤瑾管理員系統」'))
@@ -92,7 +92,7 @@ def callback(request):
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("jolinoff", event.message.text): ##### 關閉抽彤瑾管理員系統 #####
                 if User_Info.objects.filter(uid=uid).exists()==False:
-                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="default", point=0)
+                    User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="default")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "default")
                 message.append(TextSendMessage(text='//已關閉「抽彤瑾管理員系統\n掰掰周彤瑾'))
@@ -168,7 +168,9 @@ def callback(request):
                     elif re.match(stage, "default"):
                         message.append(TextSendMessage(text='感謝您使用資工感化院集點卡，請按選單上的選項進行點數查詢!!'))
                     line_bot_api.reply_message(event.reply_token,message)
-
+                elif User_Info.objects.filter(uid=uid).exists()==False:
+                    message.append(TextSendMessage(text='感謝您使用資工感化院集點卡，請按選單上的選項進行點數查詢!!'))
+                    line_bot_api.reply_message(event.reply_token,message)
 
 
 
