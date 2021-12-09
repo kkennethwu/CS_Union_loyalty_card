@@ -5,13 +5,16 @@ from django.http.response import StreamingHttpResponse
 from loyalty_card.models import *
 from import_export.admin import ImportExportModelAdmin
 
-from loyalty_card.resources import GithubResource, HotpotResource, MachiResource, SheetResource
+from loyalty_card.resources import *
 
 
 class User_Info_Admin(ImportExportModelAdmin):
     list_display = ('uid','name','pic_url','mtext','mdt')
 admin.site.register(User_Info,User_Info_Admin)
 
+class CCK_Admin(ImportExportModelAdmin):
+    resource_class = CCKResource
+admin.site.register(CCK,CCK_Admin)
 
 class Sheet_Admin(ImportExportModelAdmin):
     resource_class = SheetResource

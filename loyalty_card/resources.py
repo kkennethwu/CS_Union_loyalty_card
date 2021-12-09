@@ -1,6 +1,11 @@
 from import_export import resources
 from .models import *
 
+class CCKResource(resources.ModelResource):
+    class Meta:
+        model = CCK
+        field = ('id', 'student_id')
+
 class SheetResource(resources.ModelResource):
     class Meta:
         model = Sheet
