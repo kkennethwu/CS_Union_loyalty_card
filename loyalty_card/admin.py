@@ -23,6 +23,7 @@ class Sheet_Admin(ImportExportModelAdmin):
 admin.site.register(Sheet,Sheet_Admin)
 
 class Github_Admin(ImportExportModelAdmin):
+    list_display = ('id', 'student_id', 'getpoint')
     resource_class = GithubResource
 admin.site.register(Github,Github_Admin)
 
@@ -32,6 +33,7 @@ class Hotpot_Admin(ImportExportModelAdmin):
 admin.site.register(Hotpot,Hotpot_Admin)
 
 class Machi_Admin(ImportExportModelAdmin):
+    list_display = ('id', 'student_id', 'getpoint')
     resource_class = MachiResource
 admin.site.register(Machi,Machi_Admin)
 
