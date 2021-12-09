@@ -137,7 +137,6 @@ def callback(request):
                     elif Machi.objects.filter(student_id = event.message.text).exists() == True:
                         student_info = Machi.objects.filter(student_id = event.message.text)
                         message.append(TextSendMessage(text='學號%s 已獲得%s點'%(event.message.text, student_info[0].getpoint)))
-                line_bot_api.reply_message(event.reply_token,message)
                 if re.match(stage, "點數查詢"):
                     message.append(TextSendMessage(text='//查詢「總點數」'))
                     sum = 0
@@ -160,7 +159,8 @@ def callback(request):
                         message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名任一資工感化院活動\n2.未參加任一資工感化院活動\n3.輸入非學號字元\n**如有任何問題請聯絡交大資工系學會粉專'%(event.message.text)))
                     else:
                         message.append(TextSendMessage(text='學號%s 獲得%s點'%(event.message.text, sum)))
-
+                # Robot Reply
+                line_bot_api.reply_message(event.reply_token,message)
 
 
 
