@@ -27,7 +27,7 @@ class Sheet(models.Model):
 class Machi(models.Model):
     student_id = models.CharField(max_length=20)
     getpoint = models.IntegerField(default=0)
+
 class Jolin(models.Model):
     student_id = models.CharField(max_length=20)
     getpoint = models.IntegerField(default=0)
-    flg = models.BooleanField(default=0)

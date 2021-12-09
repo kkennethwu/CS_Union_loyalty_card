@@ -31,6 +31,5 @@ admin.site.register(Machi,Machi_Admin)
 
 class Jolin_Admin(ImportExportModelAdmin):
     resource_class = JolinResource
-    list_display = ('student_id', 'flg', 'getpoint')
 admin.site.register(Jolin, Jolin_Admin)
 
