@@ -23,4 +23,5 @@ class MachiResource(resources.ModelResource):
 class HotpotResource(resources.ModelResource):
     class Meta:
         model = Hotpot
-        field = ('id', 'student_id')
+        import_id_fields = ['student_id']
+

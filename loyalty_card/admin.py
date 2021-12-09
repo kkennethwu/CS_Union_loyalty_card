@@ -27,6 +27,7 @@ class Github_Admin(ImportExportModelAdmin):
 admin.site.register(Github,Github_Admin)
 
 class Hotpot_Admin(ImportExportModelAdmin):
+    list_display = ('id', 'student_id', 'getpoint')
     resource_class = HotpotResource
 admin.site.register(Hotpot,Hotpot_Admin)
 
