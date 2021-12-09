@@ -95,7 +95,7 @@ def callback(request):
                     User_Info.objects.create(uid=uid,name=name,pic_url=pic_url,mtext=mtext, stage="default")
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "default")
-                message.append(TextSendMessage(text='//已關閉「抽彤瑾管理員系統\n掰掰周彤瑾'))
+                message.append(TextSendMessage(text='//已關閉「抽彤瑾管理員系統」\n掰掰周彤瑾'))
                 line_bot_api.reply_message(event.reply_token,message)
             else:
                 ##### 查詢集點狀況 #####
