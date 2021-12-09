@@ -22,4 +22,4 @@ class HotpotResource(resources.ModelResource):
 class JolinResource(resources.ModelResource):
     class Mate:
         model = Jolin
-        field = ('id', 'student_id', 'flg')
+        field = ('student_id', 'flg')
