@@ -4,7 +4,7 @@ from .models import *
 class CCKResource(resources.ModelResource):
     class Meta:
         model = CCK
-        field = ('student_id')
+        field = ('id', 'student_id', 'flg')
 
 class SheetResource(resources.ModelResource):
     class Meta:

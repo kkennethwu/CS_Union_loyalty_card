@@ -13,7 +13,7 @@ class User_Info_Admin(ImportExportModelAdmin):
 admin.site.register(User_Info,User_Info_Admin)
 
 class CCK_Admin(ImportExportModelAdmin):
-    list_display = ('student_id', 'getpoint')
+    list_display = ('id', 'student_id', 'flg', 'getpoint')
     resource_class = CCKResource
 admin.site.register(CCK,CCK_Admin)
 

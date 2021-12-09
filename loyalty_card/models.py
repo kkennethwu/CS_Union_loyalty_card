@@ -15,6 +15,7 @@ class User_Info(models.Model):
 class CCK(models.Model):
     student_id = models.CharField(max_length=20)
     getpoint = models.IntegerField(default=0)
+    flg = models.BooleanField(default=0)
 
 class Hotpot(models.Model):
     student_id = models.CharField(max_length=20)
