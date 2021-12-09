@@ -18,6 +18,7 @@ class CCK_Admin(ImportExportModelAdmin):
 admin.site.register(CCK,CCK_Admin)
 
 class Sheet_Admin(ImportExportModelAdmin):
+    list_display = ('id', 'student_id', 'getpoint')
     resource_class = SheetResource
 admin.site.register(Sheet,Sheet_Admin)
 
