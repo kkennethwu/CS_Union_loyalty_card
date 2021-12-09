@@ -155,7 +155,7 @@ def callback(request):
                     if Machi.objects.filter(student_id = event.message.text).exists() == True:
                         student_info = Machi.objects.filter(student_id = event.message.text)
                         sum += student_info[0].getpoint
-                    if re.match(sum, 0):
+                    if sum == 0:
                         message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名任一資工感化院活動\n2.未參加任一資工感化院活動\n3.輸入非學號字元\n**如有任何問題請聯絡交大資工系學會粉專'%(event.message.text)))
                     else:
                         message.append(TextSendMessage(text='學號%s 獲得%s點'%(event.message.text, sum)))
