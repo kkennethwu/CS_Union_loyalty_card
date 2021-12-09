@@ -88,7 +88,7 @@ def callback(request):
                 elif User_Info.objects.filter(uid=uid).exists()==True:
                     User_Info.objects.filter(uid=uid).update(stage = "抽彤瑾管理員系統")
                 message.append(TextSendMessage(text='//已進入 「抽彤瑾管理員系統」'))
-                message.append(TextSendMessage(text='周彤瑾，請你輸入有玩「抽彤瑾」的人的學號，如果你要關掉請輸入"jolinoff"，不然直接按下面的選單也可。'))
+                message.append(TextSendMessage(text='周彤瑾，請你輸入有玩「抽彤瑾」的人的學號，如果你要關掉「抽彤瑾管理員系統」請輸入"jolinoff"，不然直接按下面的選單也可。'))
                 line_bot_api.reply_message(event.reply_token,message)
             elif re.match("jolinoff", event.message.text): ##### 關閉抽彤瑾管理員系統 #####
                 if User_Info.objects.filter(uid=uid).exists()==False:
