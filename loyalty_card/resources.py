@@ -19,7 +19,7 @@ class HotpotResource(resources.ModelResource):
     class Meta:
         model = Hotpot
         field = ('id', 'student_id')
-class JolinResource(resources.JolinResource):
+class JolinResource(resources.ModelResource):
     class Mate:
         model = Jolin
         field = ('id', 'student_id', 'flg')
