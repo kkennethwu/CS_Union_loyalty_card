@@ -103,17 +103,24 @@ def callback(request):
                 for user in user_info:
                     stage = user.stage
                 if re.match(stage, "簡歷工作坊"):
-                    message.append(TextSendMessage(text='//Stage in 簡歷工作坊\n'))
+                    message.append(TextSendMessage(text='//查詢「簡歷工作坊」集點狀況\n'))
                     if Sheet.objects.filter(student_id = event.message.text).exists() == False:
-                        message.append(TextSendMessage(text='學號%s\n尚未報名或是輸入非學號字元\n'%(event.message.text)))
+                        message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元\n'%(event.message.text)))
                     elif Sheet.objects.filter(student_id = event.message.text).exists() == True:
                         student_info = Sheet.objects.filter(student_id = event.message.text)
-                        for s in student_info:
-                            if s.getpoint == 0:
-                                Sheet.objects.filter(student_id = event.message.text).update(getpoint = 2)
-                                message.append(TextSendMessage(text='學號%s\n已集點成功 獲得兩點\n'%(event.message.text)))
-                            else:
-                                message.append(TextSendMessage(text='學號%s\n簡歷工作坊已經集點過囉\n'%(event.message.text)))
+                        message.append(TextSendMessage(text='學號%s 獲得%s點\n'%(event.message.text, student_info.getpoint)))
+                elif re.match(stage, "抽彤瑾"):
+                    message.append(TextSendMessage(text='Stage in 抽彤瑾'))
+                    # if Sheet.objects.filter(student_id = event.message.text).exists() == False:
+                    #     message.append(TextSendMessage(text='您尚未報名\n'))
+                    # elif Sheet.objects.filter(student_id = event.message.text).exists() == True:
+                    #     student_info = Sheet.objects.filter(student_id = event.message.text)
+                    #     for s in student_info:
+                    #         if s.getpoint == 0:
+                    #             Sheet.objects.filter(student_id = event.message.text).update(getpoint = 2)
+                    #             message.append(TextSendMessage(text='已集點成功 獲得兩點\n'))
+                    #         else:
+                    #             message.append(TextSendMessage(text='已經集點過囉 現有兩點\n'))
                 elif re.match(stage, "火鍋大會"):
                     message.append(TextSendMessage(text='//Stage in 火鍋大會\n'))
                     if Hotpot.objects.filter(student_id = event.message.text).exists() == False:
@@ -150,18 +157,6 @@ def callback(request):
                                 message.append(TextSendMessage(text='已集點成功 獲得兩點\n'))
                             else:
                                 message.append(TextSendMessage(text='已經集點過囉 現有兩點\n'))
-                elif re.match(stage, "抽彤瑾"):
-                    message.append(TextSendMessage(text='Stage in 抽彤瑾'))
-                    # if Sheet.objects.filter(student_id = event.message.text).exists() == False:
-                    #     message.append(TextSendMessage(text='您尚未報名\n'))
-                    # elif Sheet.objects.filter(student_id = event.message.text).exists() == True:
-                    #     student_info = Sheet.objects.filter(student_id = event.message.text)
-                    #     for s in student_info:
-                    #         if s.getpoint == 0:
-                    #             Sheet.objects.filter(student_id = event.message.text).update(getpoint = 2)
-                    #             message.append(TextSendMessage(text='已集點成功 獲得兩點\n'))
-                    #         else:
-                    #             message.append(TextSendMessage(text='已經集點過囉 現有兩點\n'))
                 line_bot_api.reply_message(event.reply_token,message)
 
 
