@@ -161,7 +161,8 @@ def callback(request):
                             message.append(TextSendMessage(text='學號%s 共獲得%s點'%(event.message.text, sum)))
                         message.append(TextSendMessage(text='//查詢「總點數」'))
                     elif re.match(stage, "抽彤瑾管理員系統"):
-                        CCK.objects.create(student_id = event.message.text, getpoint = 1)
+                        unit = CCK.objects.create(student_id = event.message.text, getpoint = 1)
+                        unit.save()
                         message.append(TextSendMessage(text='//導入資料庫成功'))
                         message.append(TextSendMessage(text='周彤瑾，請輸入下一個玩的人的學號，或是輸入"jolinoff"把「抽彤瑾管理員系統」關掉'))
                     # Robot Reply
