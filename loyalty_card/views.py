@@ -105,39 +105,44 @@ def callback(request):
                         stage = user.stage
                     if re.match(stage, "簡歷工作坊"):
                         if Sheet.objects.filter(student_id = event.message.text).exists() == False:
-                            message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
+                            message.append(TextSendMessage(text='學號%s 在「簡歷工作坊」獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
                         elif Sheet.objects.filter(student_id = event.message.text).exists() == True:
                             student_info = Sheet.objects.filter(student_id = event.message.text)
-                            message.append(TextSendMessage(text='學號%s 已獲得%s點'%(event.message.text, student_info[0].getpoint)))
-                        message.append(TextSendMessage(text='//查詢「簡歷工作坊」集點狀況'))
+                            message.append(TextSendMessage(text='學號%s 在「簡歷工作坊」獲得%s點'%(event.message.text, student_info[0].getpoint)))
+                        User_Info.objects.filter(uid=uid).update(stage = "default")
+                        # message.append(TextSendMessage(text='//查詢「簡歷工作坊」集點狀況'))
                     elif re.match(stage, "抽彤瑾"):
                         if CCK.objects.filter(student_id = event.message.text).exists() == False:
-                            message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
+                            message.append(TextSendMessage(text='學號%s 在「抽彤瑾」獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
                         elif CCK.objects.filter(student_id = event.message.text).exists() == True:
                             student_info = CCK.objects.filter(student_id = event.message.text)
-                            message.append(TextSendMessage(text='學號%s 已獲得%s點'%(event.message.text, student_info[0].getpoint)))
-                        message.append(TextSendMessage(text='//查詢「抽彤瑾」集點狀況'))
+                            message.append(TextSendMessage(text='學號%s 在「抽彤瑾」獲得%s點'%(event.message.text, student_info[0].getpoint)))
+                        User_Info.objects.filter(uid=uid).update(stage = "default")
+                        # message.append(TextSendMessage(text='//查詢「抽彤瑾」集點狀況'))
                     elif re.match(stage, "火鍋大會"):
                         if Hotpot.objects.filter(student_id = event.message.text).exists() == False:
-                            message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
+                            message.append(TextSendMessage(text='學號%s 在「火鍋大會」獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
                         elif Hotpot.objects.filter(student_id = event.message.text).exists() == True:
                             student_info = Hotpot.objects.filter(student_id = event.message.text)
-                            message.append(TextSendMessage(text='學號%s 已獲得%s點'%(event.message.text, student_info[0].getpoint)))
-                        message.append(TextSendMessage(text='//查詢「火鍋大會」集點狀況'))
+                            message.append(TextSendMessage(text='學號%s 在「火鍋大會」獲得%s點'%(event.message.text, student_info[0].getpoint)))
+                        User_Info.objects.filter(uid=uid).update(stage = "default")
+                        # message.append(TextSendMessage(text='//查詢「火鍋大會」集點狀況'))
                     elif re.match(stage, "GitHub工作坊"):
                         if Github.objects.filter(student_id = event.message.text).exists() == False:
-                            message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
+                            message.append(TextSendMessage(text='學號%s 在「GitHub工作坊」獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
                         elif Github.objects.filter(student_id = event.message.text).exists() == True:
                             student_info = Github.objects.filter(student_id = event.message.text)
-                            message.append(TextSendMessage(text='學號%s 已獲得%s點'%(event.message.text, student_info[0].getpoint)))
-                        message.append(TextSendMessage(text='//查詢「抽彤瑾」集點狀況'))
+                            message.append(TextSendMessage(text='學號%s 在「GitHub工作坊」獲得%s點'%(event.message.text, student_info[0].getpoint)))
+                        User_Info.objects.filter(uid=uid).update(stage = "default")
+                        # message.append(TextSendMessage(text='//查詢「GitHub工作坊」集點狀況'))
                     elif re.match(stage, "你麻糬了"):
                         if Machi.objects.filter(student_id = event.message.text).exists() == False:
-                            message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
+                            message.append(TextSendMessage(text='學號%s 在「你麻糬了」獲得0點\n可能為以下狀況:\n1.未報名\n2.未參加\n3.輸入非學號字元'%(event.message.text)))
                         elif Machi.objects.filter(student_id = event.message.text).exists() == True:
                             student_info = Machi.objects.filter(student_id = event.message.text)
-                            message.append(TextSendMessage(text='學號%s 已獲得%s點'%(event.message.text, student_info[0].getpoint)))
-                        message.append(TextSendMessage(text='//查詢「抽彤瑾」集點狀況'))
+                            message.append(TextSendMessage(text='學號%s 在「你麻糬了」獲得%s點'%(event.message.text, student_info[0].getpoint)))
+                        User_Info.objects.filter(uid=uid).update(stage = "default")
+                        # message.append(TextSendMessage(text='//查詢「你麻糬了」集點狀況'))
                     elif re.match(stage, "點數查詢"):
                         sum = 0
                         if Sheet.objects.filter(student_id = event.message.text).exists() == True:
@@ -157,9 +162,14 @@ def callback(request):
                             sum += student_info[0].getpoint
                         if sum == 0:
                             message.append(TextSendMessage(text='學號%s 獲得0點\n可能為以下狀況:\n1.未報名任一資工感化院活動\n2.未參加任一資工感化院活動\n3.輸入非學號字元\n**如有任何問題請聯絡交大資工系學會粉專'%(event.message.text)))
+                        elif sum<3:
+                            message.append(TextSendMessage(text='學號%s 共獲得%s點。很可惜，並未獲得「精美小獎」兌換資格，以及「大獎」抽獎資格。感謝您的參與!'%(event.message.text, sum)))
+                        elif sum<5:
+                            message.append(TextSendMessage(text='學號%s 共獲得%s點。恭喜您，獲得「精美小獎」兌換資格，請留意資工系學會粉專，屆時會公布兌換時間地點。感謝您的參與!'%(event.message.text, sum)))
                         else:
-                            message.append(TextSendMessage(text='學號%s 共獲得%s點'%(event.message.text, sum)))
-                        message.append(TextSendMessage(text='//查詢「總點數」'))
+                            message.append(TextSendMessage(text='學號%s 共獲得%s點。恭喜您，獲得「精美小獎」兌換資格，以及「大獎」抽獎資格。請留意資工系學會粉專，屆時會公布兌換、抽獎資訊。感謝您的參與!'%(event.message.text, sum)))
+                        User_Info.objects.filter(uid=uid).update(stage = "default")
+                        # message.append(TextSendMessage(text='//查詢「總點數」'))
                     elif re.match(stage, "抽彤瑾管理員系統"):
                         unit = CCK.objects.create(student_id = event.message.text, getpoint = 1)
                         unit.save()
